@@ -1,29 +1,75 @@
-<h1>Registrazione</h1>
+<x-layout>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6">
 
-@if ($errors->any())
-    <div style="color: red;">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
+            <div class="card shadow">
+                <div class="card-body">
+
+                    <h1 class="mb-4">Registrazione</h1>
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="mb-0">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <form method="POST" action="/register">
+                        @csrf
+
+                        <div class="mb-3">
+                            <label class="form-label">Nome</label>
+                            <input 
+                                type="text" 
+                                name="name" 
+                                class="form-control" 
+                                placeholder="Inserisci il tuo nome"
+                                value="{{ old('name') }}"
+                            >
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input 
+                                type="email" 
+                                name="email" 
+                                class="form-control" 
+                                placeholder="Inserisci la tua email"
+                                value="{{ old('email') }}"
+                            >
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input 
+                                type="password" 
+                                name="password" 
+                                class="form-control" 
+                                placeholder="Inserisci la password"
+                            >
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Conferma password</label>
+                            <input 
+                                type="password" 
+                                name="password_confirmation" 
+                                class="form-control" 
+                                placeholder="Conferma la password"
+                            >
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">
+                            Registrati
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
     </div>
-@endif
-
-<form method="POST" action="/register">
-    @csrf
-
-    <input type="text" name="name" placeholder="Nome" value="{{ old('name') }}">
-    <br><br>
-
-    <input type="email" name="email" placeholder="Email" value="{{ old('email') }}">
-    <br><br>
-
-    <input type="password" name="password" placeholder="Password">
-    <br><br>
-
-    <input type="password" name="password_confirmation" placeholder="Conferma password">
-    <br><br>
-
-    <button type="submit">Registrati</button>
-</form>
+</x-layout>
